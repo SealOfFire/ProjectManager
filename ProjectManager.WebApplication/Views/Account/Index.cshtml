@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "登陆";
+}
+<h2>登陆</h2>
+@using (Html.BeginForm("Login", "Account", FormMethod.Post))
+{
+    @Html.AntiForgeryToken();
+    @Html.TextBox("userName")
+    <br />
+    @Html.TextBox("password")
+    <button type="submit">登陆</button>
+}

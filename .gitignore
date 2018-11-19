@@ -328,3 +328,6 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
+/ProjectManager.WebApplication/archives
+/ProjectManager.WebApplication/archives_amdb
+/ProjectManager.WebApplication/archives_pmdb

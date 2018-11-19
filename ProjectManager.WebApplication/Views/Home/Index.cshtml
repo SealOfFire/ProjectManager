@@ -1,0 +1,13 @@
+﻿@using ProjectManager.WebApplication.Extensions
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<div id="1">
+    @Html.Action("Test1", "Home")
+</div>
+<div id="2">
+    @Html.ActionAuth("Test2", "Home")
+</div>
