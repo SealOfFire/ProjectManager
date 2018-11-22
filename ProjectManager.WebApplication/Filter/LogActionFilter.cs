@@ -8,7 +8,10 @@ using System.Web.Routing;
 
 namespace ProjectManager.WebApplication.Filter
 {
-    // 记录日志
+    /// <summary>
+    /// 记录日志
+    /// TODO 增加记录访问用户的IP
+    /// </summary>
     public class LogActionFilter : ActionFilterAttribute
     {
         /// <summary>
