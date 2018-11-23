@@ -1,4 +1,5 @@
 ﻿using MySql.Data.Entity;
+using ProjectManager.Common.LoginUserInfo;
 using ProjectManager.Log;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Infrastructure.Interception;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Reflection;
+using System.Web;
 
 namespace ProjectManager.DAL
 {
@@ -35,6 +37,7 @@ namespace ProjectManager.DAL
         /// <returns></returns>
         public override int SaveChanges()
         {
+            this.CheckEntity();
             this.RecordDbChangeLog();
             return base.SaveChanges();
         }
@@ -58,10 +61,58 @@ namespace ProjectManager.DAL
         //}
 
         /// <summary>
+        /// 检查数据
+        /// </summary>
+        private void CheckEntity()
+        {
+            AutoLogger.Trace(string.Format("-- CheckEntity BEGIN --"));
+            IEnumerable<DbEntityEntry> values = this.ChangeTracker.Entries();
+            foreach (DbEntityEntry value in values)
+            {
+                // TODO 日志
+                // AutoLogger.Info(string.Format("[{0}]:[CheckEntity BEGIN]", entityType.Name));
+                if (value.Entity is BaseModel)
+                {
+                    BaseModel entity = value.Entity as BaseModel;
+                    if (HttpContext.Current.User.Identity.IsAuthenticated)
+                    {
+                        LoginUserPrincipal user = HttpContext.Current.User as LoginUserPrincipal;
+                        // 自动修改插入数据的插入用户和插入日期
+                        if (value.State == EntityState.Added)
+                        {
+                            entity.InsertDate = DateTime.Now;
+                            entity.InsertUser = user.ID;
+                            entity.UpdateDate = DateTime.Now;
+                            entity.UpdateUser = user.ID;
+                        }
+                        // 自动修改更新数据的更新用户和更新日期
+                        if (value.State == EntityState.Modified)
+                        {
+                            entity.UpdateDate = DateTime.Now;
+                            entity.UpdateUser = user.ID;
+                        }
+                        if (value.State == EntityState.Deleted || value.State == EntityState.Modified)
+                        {
+                            DateTime lastUpdateDate = (DateTime)value.GetDatabaseValues()["UpdateDate"];
+                            if (entity.UpdateDate != lastUpdateDate)
+                            {
+                                throw new Exception("更新数据的排它日期错误");
+                            }
+                        }
+                    }
+                }
+                // TODO 日志
+                // AutoLogger.Info(string.Format("[{0}]:[CheckEntity END]", entityType.Name));
+            }
+            AutoLogger.Trace(string.Format("-- CheckEntity END --"));
+        }
+
+        /// <summary>
         /// 记录数据库日志
         /// </summary>
         private void RecordDbChangeLog()
         {
+            AutoLogger.Trace(string.Format("-- RecordDbChangeLog BEGIN --"));
             // 比较改变的项目，保存修改日志
             // 所有改变的实体
             IEnumerable<DbEntityEntry> values = this.ChangeTracker.Entries();
@@ -114,6 +165,8 @@ namespace ProjectManager.DAL
 
                 AutoLogger.Info(string.Format("[{0}]:[修改记录 END]", entityType.Name));
             }
+
+            AutoLogger.Trace(string.Format("-- RecordDbChangeLog END --"));
         }
 
         #endregion
