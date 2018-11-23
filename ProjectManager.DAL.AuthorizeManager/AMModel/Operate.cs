@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ProjectManager.DAL.AuthorizeManager.AMModel
 {
     [Serializable]
-    [Table("operate")]
+    [Table("operate", Schema = "authorize_manager")]
     public class Operate
     {
         [Column("ID")]

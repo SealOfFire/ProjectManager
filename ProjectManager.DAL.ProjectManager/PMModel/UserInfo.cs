@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ProjectManager.DAL.ProjectManager.PMModel
 {
     [Serializable]
-    [Table("user_info")]
+    [Table("user_info", Schema = "project_manager")]
     public class UserInfo
     {
         #region 数据库映射属性

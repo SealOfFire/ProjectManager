@@ -9,7 +9,7 @@ namespace ProjectManager.DAL.ProjectManager.PMModel
     /// 部门
     /// </summary>
     [Serializable]
-    [Table("department")]
+    [Table("department", Schema = "project_manager")]
     public class Department
     {
         #region 数据库映射属性
