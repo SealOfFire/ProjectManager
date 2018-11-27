@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using ProjectManager.WebApplication.Authorize;
 using System.Web.Mvc;
 
 namespace ProjectManager.WebApplication.Controllers
@@ -9,7 +6,7 @@ namespace ProjectManager.WebApplication.Controllers
     /// <summary>
     /// 测试单点登陆验证
     /// </summary>
-    [SSO.Authorize.SSOAuthorize]
+    [PMSSOAuthorize]
     public class SSOTestController : Controller
     {
         // GET: SSOTest
