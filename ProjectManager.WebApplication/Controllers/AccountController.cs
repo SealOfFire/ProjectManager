@@ -1,5 +1,4 @@
-﻿using ProjectManager.Common;
-using ProjectManager.WebApplication.Models;
+﻿using ProjectManager.Common.LoginUserInfo;
 using System;
 using System.Web;
 using System.Web.Mvc;
@@ -42,7 +41,7 @@ namespace ProjectManager.WebApplication.Controllers
         /// 用户登陆信息写道客户端cookies
         /// </summary>
         /// <param name="userName"></param>
-        public void CreateAuthenticationTicket(Guid Id, string userName, string password)
+        private void CreateAuthenticationTicket(Guid Id, string userName, string password)
         {
             LoginUserPrincipalSerializedModel serializeModel = new LoginUserPrincipalSerializedModel();
             serializeModel.ID = Id.ToString("N");

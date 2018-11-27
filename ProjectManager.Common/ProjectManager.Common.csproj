@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="LoginUserInfo\LoginUserIdentity.cs" />
     <Compile Include="LoginUserInfo\LoginUserPrincipal.cs" />
+    <Compile Include="LoginUserInfo\LoginUserPrincipalSerializedModel.cs" />
     <Compile Include="MyIdentity.cs" />
     <Compile Include="MyPrincipal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

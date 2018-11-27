@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ProjectManager.WebApplication.Models
+namespace ProjectManager.Common.LoginUserInfo
 {
     [Serializable]
     public class LoginUserPrincipalSerializedModel

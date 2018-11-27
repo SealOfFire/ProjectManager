@@ -1,0 +1,34 @@
+﻿@model ProjectManager.SSO.Models.Account
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+        <h1>登陆页面</h1>
+        @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.AppID)
+            @Html.HiddenFor(m => m.RedirectUrl)
+            @Html.HiddenFor(m => m.SSOUrl)
+
+            @Html.LabelFor(m => m.UserName)
+            @Html.TextBoxFor(m => m.UserName)
+            <br />
+            @Html.LabelFor(m => m.Password)
+            @Html.PasswordFor(m => m.Password)
+            <br />
+            <button type="submit">登陆</button>
+        }
+    </div>
+</body>
+</html>

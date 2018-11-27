@@ -1,12 +1,8 @@
 ﻿using MySql.Data.Entity;
 using ProjectManager.Common.LoginUserInfo;
-using ProjectManager.DAL.AuthorizeManager;
-using ProjectManager.DAL.AuthorizeManager.AMModel;
 using ProjectManager.Log;
-using ProjectManager.WebApplication.Models;
 using System;
 using System.Data.Entity;
-using System.Linq;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
@@ -71,6 +67,10 @@ namespace ProjectManager.WebApplication
                 LoginUserPrincipal newUser = new LoginUserPrincipal(Guid.Parse(serializeModel.ID), serializeModel.UserName, serializeModel.Password);
                 HttpContext.Current.User = newUser;
             }
+
+            // 使用单点登陆的验证
+            SSO.Authorize.Helper.GetAuthCookie(HttpContext.Current);
+
         }
     }
 }
