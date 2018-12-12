@@ -4,6 +4,7 @@ using System.Security.Principal;
 
 namespace ProjectManager.Common
 {
+    [Obsolete("测试用的代码")]
     public class MyPrincipal : IPrincipal
     {
         private IIdentity identity;

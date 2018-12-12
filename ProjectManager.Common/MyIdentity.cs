@@ -1,7 +1,9 @@
-﻿using System.Security.Principal;
+﻿using System;
+using System.Security.Principal;
 
 namespace ProjectManager.Common
 {
+    [Obsolete("测试用的代码")]
     public class MyIdentity : IIdentity
     {
         public string Name
