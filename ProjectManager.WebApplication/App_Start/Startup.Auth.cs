@@ -1,6 +1,6 @@
 ﻿using Owin;
 
-namespace ProjectManager.WebApplication.App_Start
+namespace ProjectManager.WebApplication
 {
     public partial class Startup
     {

@@ -10,7 +10,7 @@ namespace ProjectManager.WebApplication
         public void Configuration(IAppBuilder app)
         {
             Logger.Info("owin startup");
-            this.Configuration(app);
+            this.ConfigureAuth(app);
         }
     }
 }
